@@ -7,7 +7,7 @@ type hydro_problem
 
 integer :: N 
 real(dp), allocatable, dimension(:) :: x, u, q      ! Grid and velocity
-integer :: flux_lim
+integer :: flux_lim, bcl, bcr
 real(dp) :: dt                      ! Time Step
 real(dp) :: xmin, xmax, dx
 
@@ -22,9 +22,9 @@ use lib_array, only:  linspace
 type(hydro_problem), intent(inout) :: this
 character*100, intent(in) :: init_file
 real(dp) :: xmin, xmax, dt
-integer :: N, flux_lim
+integer :: N, flux_lim, bcl, bcr
 
-namelist /input/N,xmin,xmax,dt,flux_lim 
+namelist /input/N,xmin,xmax,dt,flux_lim,bcl,bcr
 
 open(13,file=trim(init_file),status='old')
 read(13,nml=input)
@@ -49,6 +49,8 @@ this%dx = this%x(2)-this%x(1)
 !dt = 0.1*dx/u(2)
 this%dt = dt
 this%flux_lim = flux_lim
+this%bcl = bcl
+this%bcr = bcr
 
 end subroutine init
 

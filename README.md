@@ -15,10 +15,10 @@ Running
 -------
 
 To run the code, edit the Makefile in the src/ directory to fit your complier
-and point to fortranlib by astrofrog [2] which is a build dependancy.  Then run
-the traditional 'make' command to compile. (This can also be run in the base
-directory) After the code is compiled, an executable 'sirrah' is created in the
-base directory. To run type:
+and point to fortranlib by Thomas Robitaille (astrofrog) [2] which is a build
+dependancy.  Then run the traditional 'make' command to compile. (This can also
+be run in the base directory) After the code is compiled, an executable
+'sirrah' is created in the base directory. To run type:
 
     ./sirrah my_infile.txt
 

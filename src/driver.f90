@@ -14,7 +14,7 @@ call init(hp,init_file)
 
 ! Do time update
 do i = 1,300
-  call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim)
+  call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim,hp%bcl,hp%bcr)
 end do
 
 ! Create new directory and write output
