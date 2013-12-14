@@ -1,0 +1,6 @@
+*.a 
+*.dat 
+*.x 
+*.mod
+*.o
+outputs/
