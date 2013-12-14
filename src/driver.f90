@@ -1,29 +1,36 @@
 program driver
 use base_types, only: dp
 use hydro_1d, only: advect
-use inits, only: hydro_problem, init
+use io, only: hydro_problem, init, dalloc_hp, write_hp
 implicit none
 
-integer :: i
+integer :: i, dumpn
+real(dp) ::  ctime
 type(hydro_problem) :: hp
-character*100 :: init_file
+character*100 :: init_file, outfile
 
 ! Set up initial conditions
-CALL getarg(1, init_file)
+call getarg(1, init_file)
 call init(hp,init_file)
 
 ! Do time update
-do i = 1,300
+ctime = hp%tmin
+dumpn = 0
+do while (ctime .le. hp%tmax)
   call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim,hp%bcl,hp%bcr)
-end do
 
-! Create new directory and write output
-call system('mkdir -p outputs')
-open(unit=10, file="outputs/output.txt")
-do i=1,size(hp%x)
-   write(10,'(2(ES13.4))')  hp%x(i), hp%q(i)
-end do
-close(10)
+  if (mod(dumpn,hp%dtdump) .eq. 0) then
+     write(outfile,'(A,I6.6,A)') 'outputs/'//trim(hp%pname)//'-',dumpn, '.txt'
+     call write_hp(hp,outfile)
+  end if 
+  ctime = ctime + hp%dt
+  dumpn = dumpn + 1
+enddo
+write(outfile,'(A,I6.6,A)') 'outputs/'//trim(hp%pname)//'-',dumpn, '.txt'
+call write_hp(hp,outfile)
+
+
+call dalloc_hp(hp)
 
 end program driver
 

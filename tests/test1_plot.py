@@ -3,6 +3,12 @@
 
 from pylab import *
 
-a, b = loadtxt('outputs/output.txt',unpack=True)
+a, b = loadtxt('outputs/test1-000000.txt',unpack=True)
+plot(a,b)
+a, b = loadtxt('outputs/test1-000100.txt',unpack=True)
+plot(a,b)
+a, b = loadtxt('outputs/test1-000200.txt',unpack=True)
+plot(a,b)
+a, b = loadtxt('outputs/test1-000300.txt',unpack=True)
 plot(a,b)
 show()

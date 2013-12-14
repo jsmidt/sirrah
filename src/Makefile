@@ -14,7 +14,7 @@ FLIB    = $(FLIBDIR)/src/base_types.o $(FLIBDIR)/src/lib_constants.o $(FLIBDIR)/
 FOBS = base_types.o lib_constants.o lib_array.o
 
 # The files needed to compile unique to SIRRAH.
-OBJS	= inits.o hydro_1d.o driver.o 	
+OBJS	= io.o hydro_1d.o driver.o 	
 
 # The compile tree
 default: sirrah 
