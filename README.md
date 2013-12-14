@@ -1,7 +1,7 @@
 SIRRAH
 ====== 
 
-A *S*pec*I*al-*R*elativistic *RA*diation *H*ydrodynamics Code
+A __S__pec__I__al-__R__elativistic __RA__diation __H__ydrodynamics Code
 
 About
 -----
@@ -54,4 +54,5 @@ reference) were used for the creation of this code. Just me, my personal
 computer, the Dullemond lectures [1] coding during my free time.
 
 [1] http://www.ita.uni-heidelberg.de/~dullemond/lectures/num_fluid_2012/index.shtml
+
 [2] https://github.com/astrofrog/fortranlib
