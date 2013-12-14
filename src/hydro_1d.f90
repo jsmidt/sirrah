@@ -22,15 +22,15 @@ q_new = 0
 x_gh = 0
 q_gh = 0
 u_gh = 0
-q_gh(3:size(x)-2) = q
-x_gh(3:size(x)-2) = x
-u_gh(3:size(x)-2) = u
+q_gh(3:size(x_gh)-2) = q
+x_gh(3:size(x_gh)-2) = x
+u_gh(3:size(x_gh)-2) = u
 q_new = q_gh
 
 
 
 ! Do the general advection update across the grid.
-do i = 3,size(x)-2
+do i = 3,size(x_gh)-2
 
     ! Update Boundry Conditions
     call update_boudries(x_gh,u_gh,q_gh,bcl,bcr)
@@ -77,7 +77,7 @@ do i = 3,size(x)-2
 end do
 
 ! Return the answer.
-q = q_new(3:size(x)-2)
+q = q_new(3:size(x_gh)-2)
 
 end subroutine advect
 
@@ -148,10 +148,10 @@ if (bcl .eq. 1) then                            ! Periodic
    dx2 = x_gh(end3) - x_gh(end4) 
    x_gh(2) = x_gh(3) - dx1
    x_gh(1) = x_gh(2) - dx2
-   u_gh(2) = u_gh(end3)
-   u_gh(1) = u_gh(end4)
-   q_gh(2) = q_gh(end3)
-   q_gh(1) = q_gh(end4)
+   u_gh(2) = u_gh(end2)
+   u_gh(1) = u_gh(end3)
+   q_gh(2) = q_gh(end2)
+   q_gh(1) = q_gh(end3)
 else if (bcl .eq. 2) then                       ! Reflexive
    dx1 = x_gh(4) - x_gh(3) 
    dx2 = x_gh(5) - x_gh(4) 
@@ -162,7 +162,6 @@ else if (bcl .eq. 2) then                       ! Reflexive
    q_gh(2) = q_gh(3)
    q_gh(1) = q_gh(4)
 else if (bcl .eq. 3) then                     ! Free outflow/inflow
-   !write(*,*) 'here'
    dx1 = x_gh(4) - x_gh(3) 
    dx2 = x_gh(5) - x_gh(4) 
    x_gh(2) = x_gh(3) - dx1
@@ -188,10 +187,10 @@ if (bcr .eq. 1) then                            ! Periodic
    dx2 = x_gh(5) - x_gh(4)
    x_gh(end1) = x_gh(end2) + dx1
    x_gh(end0) = x_gh(end1) + dx2
-   u_gh(end1) = u_gh(4)
-   u_gh(end0) = u_gh(5)
-   q_gh(end1) = q_gh(4)
-   q_gh(end0) = q_gh(5)
+   u_gh(end1) = u_gh(3)
+   u_gh(end0) = u_gh(4)
+   q_gh(end1) = q_gh(3)
+   q_gh(end0) = q_gh(4)
 else if (bcr .eq. 2) then                     ! Reflexive
    dx1 = x_gh(end2) - x_gh(end3)      
    dx2 = x_gh(end3) - x_gh(end4)      

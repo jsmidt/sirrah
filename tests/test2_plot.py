@@ -3,9 +3,9 @@
 
 from pylab import *
 
-a, b = loadtxt('outputs/test1-000000.txt',unpack=True)
+a, b = loadtxt('outputs/test2-000000.txt',unpack=True)
 plot(a,b)
-a, b = loadtxt('outputs/test1-000300.txt',unpack=True)
+a, b = loadtxt('outputs/test2-000700.txt',unpack=True)
 plot(a,b)
-title('Compare with figure 4.5 (superbee)')
+title('Compare with figure 4.7')
 show()

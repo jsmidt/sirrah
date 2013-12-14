@@ -17,12 +17,14 @@ call init(hp,init_file)
 ctime = hp%tmin
 dumpn = 0
 do while (ctime .le. hp%tmax)
-  call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim,hp%bcl,hp%bcr)
-
+  ! Write current output.
   if (mod(dumpn,hp%dtdump) .eq. 0) then
      write(outfile,'(A,I6.6,A)') 'outputs/'//trim(hp%pname)//'-',dumpn, '.txt'
      call write_hp(hp,outfile)
   end if 
+
+  ! Perform advenction step
+  call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim,hp%bcl,hp%bcr)
   ctime = ctime + hp%dt
   dumpn = dumpn + 1
 enddo

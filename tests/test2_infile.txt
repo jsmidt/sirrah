@@ -1,0 +1,11 @@
+&input pname = "test2", 
+       N = 100, 
+       dt=0.1, 
+       flux_lim=0,
+       bcl = 1,
+       bcr = 1,
+       tmin = 0.0,
+       tmax = 70.0,
+       dtdump = 100,
+       profile = "tests/test2_profile.txt" /
+
