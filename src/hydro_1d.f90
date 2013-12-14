@@ -47,10 +47,10 @@ do i = 3,size(x_gh)-2
     ! First find flux at lower interface. (fluxm)
     if (um .ge. 0) then
         theta = 1.0                                     ! eq. (4.34)
-        r = (q_gh(i-1)-q_gh(i-2))/(q_gh(i)-q_gh(i-1))   ! eq. (4.37)
+        r = (q_gh(i-1)-q_gh(i-2))/(q_gh(i)-q_gh(i-1)+1d-70)   ! eq. (4.37)
     else 
         theta = -1.0                                    ! eq. (4.34)
-        r = (q_gh(i+1)-q_gh(i))/(q_gh(i)-q_gh(i-1))     ! eq. (4.37)
+        r = (q_gh(i+1)-q_gh(i))/(q_gh(i)-q_gh(i-1)+1d-70)     ! eq. (4.37)
     end if
     phir = get_phir(r,flux_lim)                         ! eq. (4.39-4.41)
 
@@ -61,10 +61,10 @@ do i = 3,size(x_gh)-2
     ! First find flux at upper interface. (fluxp)
     if (up .ge. 0) then
         theta = 1.0                                     ! eq. (4.34)
-        r = (q_gh(i)-q_gh(i-1))/(q_gh(i+1)-q_gh(i))     ! eq. (4.37)
+        r = (q_gh(i)-q_gh(i-1))/(q_gh(i+1)-q_gh(i)+1d-70)     ! eq. (4.37)
     else 
         theta = -1.0                                    ! eq. (4.34)
-        r = (q_gh(i+2)-q_gh(i+1))/(q_gh(i+1)-q_gh(i))   ! eq. (4.37)
+        r = (q_gh(i+2)-q_gh(i+1))/(q_gh(i+1)-q_gh(i)+1d-70)   ! eq. (4.37)
     end if
     phir = get_phir(r,flux_lim)                         ! eq. (4.39-4.41)
 
@@ -194,8 +194,8 @@ if (bcr .eq. 1) then                            ! Periodic
 else if (bcr .eq. 2) then                     ! Reflexive
    dx1 = x_gh(end2) - x_gh(end3)      
    dx2 = x_gh(end3) - x_gh(end4)      
-   x_gh(end1) = x_gh(end2) - dx1
-   x_gh(end0) = x_gh(end1) - dx2
+   x_gh(end1) = x_gh(end2) + dx1
+   x_gh(end0) = x_gh(end1) + dx2
    u_gh(end1) = -u_gh(end2)
    u_gh(end0) = -u_gh(end3)
    q_gh(end1) = q_gh(end2)
@@ -203,8 +203,8 @@ else if (bcr .eq. 2) then                     ! Reflexive
 else if (bcr .eq. 3) then                     ! Free outflow/inflow
    dx1 = x_gh(end2) - x_gh(end3)      
    dx2 = x_gh(end3) - x_gh(end4)      
-   x_gh(end1) = x_gh(end2) - dx1
-   x_gh(end0) = x_gh(end1) - dx2
+   x_gh(end1) = x_gh(end2) + dx1
+   x_gh(end0) = x_gh(end1) + dx2
    u_gh(end1) = u_gh(end2)
    u_gh(end0) = u_gh(end3)
    q_gh(end1) = q_gh(end2)
@@ -212,8 +212,8 @@ else if (bcr .eq. 3) then                     ! Free outflow/inflow
 else if (bcr .eq. 4) then                     ! Free outflow, no inflow
    dx1 = x_gh(end2) - x_gh(end3)      
    dx2 = x_gh(end3) - x_gh(end4)      
-   x_gh(end1) = x_gh(end2) - dx1
-   x_gh(end0) = x_gh(end1) - dx2
+   x_gh(end1) = x_gh(end2) + dx1
+   x_gh(end0) = x_gh(end1) + dx2
    u_gh(end1) = -abs(u_gh(end2))
    u_gh(end0) = -abs(u_gh(end3))
    q_gh(end1) = q_gh(end2)

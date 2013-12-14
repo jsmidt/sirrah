@@ -27,11 +27,14 @@ do while (ctime .le. hp%tmax)
   call advect(hp%x,hp%q,hp%u,hp%dt,hp%flux_lim,hp%bcl,hp%bcr)
   ctime = ctime + hp%dt
   dumpn = dumpn + 1
+
 enddo
+
+! Write final output
 write(outfile,'(A,I6.6,A)') 'outputs/'//trim(hp%pname)//'-',dumpn, '.txt'
 call write_hp(hp,outfile)
 
-
+! Deallocate arrays
 call dalloc_hp(hp)
 
 end program driver
