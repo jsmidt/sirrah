@@ -1,7 +1,7 @@
 SIRRAH
 ====== 
 
-A __S__pec__I__al-__R__elativistic __RA__diation __H__ydrodynamics Code
+A __S__pec**I**al-__R__elativistic __RA__diation __H__ydrodynamics Code
 
 About
 -----
